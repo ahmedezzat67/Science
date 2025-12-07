@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الباب الثاني: الغلاف الجوي - رحلة في السماء</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+
+        :root {
+            --sky-top: #4facfe;
+            --sky-bottom: #00f2fe;
+            --cloud-white: #ffffff;
+            --sun-yellow: #ffd700;
+            --text-dark: #2d3436;
+            --primary-blue: #0984e3;
+            --danger: #ff7675;
+            --success: #00b894;
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* --- 1. خلفية السحاب والشمس (الثيم السماوي) --- */
+        .sky-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .sun {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            background: var(--sun-yellow);
+            border-radius: 50%;
+            box-shadow: 0 0 40px var(--sun-yellow);
+            animation: sunPulse 4s infinite alternate;
+        }
+
+        .cloud {
+            position: absolute;
+            background: var(--cloud-white);
+            border-radius: 100px;
+            opacity: 0.8;
+            animation: floatCloud linear infinite;
+        }
+        
+        /* أشكال السحاب */
+        .cloud::after, .cloud::before {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        @keyframes floatCloud {
+            from { transform: translateX(100vw); }
+            to { transform: translateX(-200px); }
+        }
+        @keyframes sunPulse {
+            from { transform: scale(1); box-shadow: 0 0 40px var(--sun-yellow); }
+            to { transform: scale(1.1); box-shadow: 0 0 60px #ffea00; }
+        }
+
+        /* --- 2. الهيكل الرئيسي --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* زر الرجوع للباب الأول */
+        .back-btn-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .back-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .back-btn:hover { transform: scale(1.1); background: #ee5253; }
+
+        header {
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+        h1 { 
+            font-size: 3rem; 
+            color: white; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2); 
+            margin: 0;
+        }
+        .subtitle { color: #f1f2f6; font-size: 1.3rem; margin-top: 10px; }
+
+        /* --- 3. أزرار التنقل (شكل غيوم) --- */
+        .nav-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .cloud-btn {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cloud-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .cloud-btn.active {
+            background: var(--sun-yellow);
+            color: var(--text-dark);
+            transform: scale(1.1);
+        }
+
+        /* --- 4. محتوى الدرس (كارت طاير) --- */
+        .content-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            min-height: 400px;
+            animation: floatUp 0.8s ease-out;
+            border: 2px solid rgba(255,255,255,0.8);
+        }
+
+        @keyframes floatUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { color: var(--primary-blue); border-bottom: 4px dashed var(--sun-yellow); display: inline-block; padding-bottom: 5px; }
+        h3 { margin-top: 30px; color: #636e72; }
+        p, li { font-size: 1.2rem; line-height: 2; }
+        
+        /* الصناديق */
+        .note-box {
+            background: #dfe6e9;
+            border-left: 5px solid var(--text-dark);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .exam-alert {
+            background: #ffeaa7;
+            border: 2px dashed #fdcb6e;
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+            margin-top: 30px;
+        }
+        .exam-alert::before {
+            content: "⚠️ سؤال امتحان";
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #fdcb6e;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #2d3436;
+        }
+
+        /* --- 5. الكويز --- */
+        .quiz-container { display: flex; flex-direction: column; gap: 20px; }
+        .q-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .q-item:hover { transform: scale(1.02); }
+
+        .opt-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #f1f2f6;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            text-align: right;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            transition: 0.2s;
+        }
+        .opt-btn:hover { background: #f1f2f6; }
+
+        .correct { background: #d4edda !important; border-color: #c3e6cb !important; color: #155724; }
+        .wrong { background: #f8d7da !important; border-color: #f5c6cb !important; color: #721c24; }
+        
+        .feedback-text {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="sky-container">
+        <div class="sun"></div>
+        </div>
+
+    <div class="container">
+        <div class="back-btn-container">
+            <a href="Unit1.html" class="back-btn">⬅️ الرجوع للباب الأول</a>
+        </div>
+
+        <header>
+            <h1>☁️ الباب الثاني: الغلاف الجوي</h1>
+            <p class="subtitle">المكونات • الطبقات • الضغط • الاستدامة</p>
+        </header>
+
+        <div class="nav-cloud" id="nav-area"></div>
+
+        <div class="content-card">
+            <div id="content-display"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. محتوى الدروس (مفصل جداً + مصري)
+        // ==========================================
+        const lessons = [
+            {
+                title: "2-1 المكونات والنشأة",
+                content: `
+                    <h2>أصل الغلاف الجوي</h2>
+                    <p>زي ما عرفنا في الباب الأول إن الميه جت من البراكين، الغلاف الجوي كمان أصله بركاني!</p>
+                    <ul>
+                        <li>أثناء تكوين الأرض، انطلقت كميات مهولة من الغازات من باطن الأرض.</li>
+                        <li>الغازات دي فضلت منفردة ومكونتش مركبات، وعملت غلاف غازي بيحيط بالأرض من كل حتة.</li>
+                    </ul>
+
+                    <h3>مكونات الهواء (حفظ صم):</h3>
+                    <p>الهواء اللي بتتنفسه ده "كوكتيل" غازات بنسب دقيقة:</p>
+                    <div class="note-box">
+                        <ul>
+                            <li><strong>النيتروجين ($N_2$):</strong> النسبة الأكبر <strong>78%</strong> (أربع أخماس الهواء). لازمته إنه بيقلل حدة الأكسجين في الاحتراق.</li>
+                            <li><strong>الأكسجين ($O_2$):</strong> نسبته <strong>21%</strong> (خمس الهواء). ده سر الحياة والتنفس والاحتراق.</li>
+                            <li><strong>غازات أخرى (1%):</strong> زي ثاني أكسيد الكربون، بخار ماء، أرجون، هيليوم.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>معلومة مهمة عن الكثافة:</h3>
+                    <p>الأكسجين والنيتروجين غازات "تقيلة" (كثافتها عالية)، عشان كده هتلاقيهم متركزين قريب من سطح الأرض. كل ما تطلع فوق (جبل أو طيارة)، كميتهم بتقل جداً ويحصل "اختناق".</p>
+                `
+            },
+            {
+                title: "2-1 طبقات الغلاف الجوي",
+                content: `
+                    <h2>طبقات الجو (من تحت لفوق)</h2>
+                    <p>العلماء قسموا الجو لـ 4 أدوار (طبقات) حسب التغير في الحرارة:</p>
+
+                    <h3>1. التروبوسفير (الطبقة المضطربة)</h3>
+                    <ul>
+                        <li>دي اللي إحنا عايشين فيها. سمكها حوالي 13 كم.</li>
+                        <li>بيحصل فيها كل الظواهر الجوية (مطر، سحاب، رعد).</li>
+                        <li><strong>الحرارة:</strong> بتقل كل ما نطلع فوق (بتوصل لـ سالب 60 تحت الصفر عند قمتها).</li>
+                    </ul>
+
+                    <h3>2. الستراتوسفير (طبقة الأوزون)</h3>
+                    <ul>
+                        <li>دي طبقة "رايقة" ومفهاش غيوم، عشان كده الطيارات بتطير في الجزء السفلي منها.</li>
+                        <li>فيها <strong>غاز الأوزون</strong> اللي بيحمينا من الأشعة فوق البنفسجية.</li>
+                        <li><strong>الحرارة:</strong> بتزيد كل ما نطلع (بسبب امتصاص الأوزون للحرارة) لحد ما توصل للصفر.</li>
+                    </ul>
+
+                    <h3>3. الميزوسفير (أبرد طبقة)</h3>
+                    <ul>
+                        <li>أبرد مكان في الغلاف الجوي (سالب 90).</li>
+                        <li>مهمتها: بتحرق الشهب اللي جاية من الفضاء قبل ما تنزل علينا.</li>
+                    </ul>
+
+                    <h3>4. الثيرموسفير (الطبقة الحرارية)</h3>
+                    <ul>
+                        <li>أسخن طبقة (بتوصل لـ 1200 درجة!).</li>
+                        <li>الجزء العلوي منها اسمه <strong>الأيونوسفير</strong> وده مهم جداً للاتصالات والموبايلات والراديو.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "2-3 الضغط الجوي (مسائل)",
+                content: `
+                    <h2>قاعدة الضغط الجوي (أهم درس)</h2>
+                    <p>الهواء له وزن، ووزنه ده بيعمل "ضغط".</p>
+                    
+                    <div class="exam-alert">
+                        <strong>القاعدة الذهبية (قانون 5.5 كم):</strong><br>
+                        "يقل الضغط الجوي لنصف قيمته كلما ارتفعنا مسافة 5.5 كم عن سطح البحر."
+                    </div>
+
+                    <h3>تعال نحسبها بالأرقام:</h3>
+                    <ul>
+                        <li><strong>على سطح البحر (ارتفاع 0):</strong> الضغط = 1 ضغط جوي (أعلى قيمة).</li>
+                        <li><strong>على ارتفاع 5.5 كم:</strong> الضغط يقل للنص = 0.5 ضغط جوي.</li>
+                        <li><strong>على ارتفاع 11 كم (5.5 + 5.5):</strong> الضغط يقل لنص النص = 0.25 (ربع) ضغط جوي.</li>
+                        <li><strong>على ارتفاع 16.5 كم:</strong> الضغط يبقى 0.125 (تمن).</li>
+                    </ul>
+
+                    <h3>مثال امتحان:</h3>
+                    <p>شخص راكب طيارة على ارتفاع 11 كم، الضغط عليه كام؟<br>
+                    <strong>الإجابة:</strong> ربع (0.25) ضغط جوي. (لأننا طلعنا 5.5 مرتين).</p>
+
+                    <div class="note-box">
+                        <strong>خد بالك:</strong> الضغط جوه الطيارة أو الغواصة دايماً بيكون "1 ضغط جوي" (لأنها مكيفة). السؤال لو قالك "الضغط على جسم الراكب" يبقى 1، لو قال "الضغط على جسم الطائرة من الخارج" يبقى تحسب بالارتفاع.
+                    </div>
+                `
+            },
+            {
+                title: "2-2 التفاعلات (الأوزون)",
+                content: `
+                    <h2>كيمياء طبقة الأوزون</h2>
+                    <p>الأوزون ($O_3$) هو الدرع الحامي للأرض. بيتكون إزاي؟</p>
+
+                    <h3>معادلة التكوين (في الستراتوسفير):</h3>
+                    <ol>
+                        <li>تيجي الأشعة فوق البنفسجية (UV) تكسر جزيء الأكسجين:<br>
+                        $O_2 + UV \rightarrow O + O$ (ذرتين حرين)</li>
+                        <li>كل ذرة حرة تجري تمسك في جزيء أكسجين تاني:<br>
+                        $O + O_2 \rightarrow O_3$ (غاز الأوزون)</li>
+                    </ol>
+
+                    <h3>تآكل الأوزون (الثقب):</h3>
+                    <p>فيه مواد بنستخدمها بتدمر الأوزون ده، زي:</p>
+                    <ul>
+                        <li><strong>الفريونات (CFCs):</strong> في التكييفات والثلاجات وعلب الرش (الإسبراي).</li>
+                        <li><strong>الهالونات:</strong> في طفايات الحريق.</li>
+                        <li><strong>أكاسيد النيتروجين:</strong> بتطلع من طيارات "الكونكورد" الأسرع من الصوت.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "2-4 الاستدامة والاحتباس",
+                content: `
+                    <h2>مشاكل الغلاف الجوي ومستقبله</h2>
+                    <p>الإنسان بهدل الغلاف الجوي بحاجتين كبار:</p>
+
+                    <h3>1. الاحتباس الحراري (Global Warming)</h3>
+                    <ul>
+                        <li>سببه زيادة غاز ثاني أكسيد الكربون ($CO_2$) والميثان.</li>
+                        <li>الغازات دي عاملة زي "زجاج الصوبة"، بتحبس الحرارة جوه الأرض.</li>
+                        <li><strong>النتيجة:</strong> ذوبان الجليد في القطبين، وغرق المدن الساحلية، وتغير المناخ.</li>
+                    </ul>
+
+                    <h3>2. الأمطار الحمضية</h3>
+                    <p>دخان المصانع فيه كبريت ونيتروجين، لما بيطلعوا للسحاب ويدوبوا في المطر، بينزل مطر عبارة عن "حمض مخفف" بيموت الشجر ويأكل واجهات المباني.</p>
+
+                    <h3>دور العلم (الحل):</h3>
+                    <ul>
+                        <li>استخدام طاقة نظيفة (شمس ورياح) بدل الفحم والبترول.</li>
+                        <li>وقف استخدام الفريونات.</li>
+                        <li>زراعة مساحات خضراء لامتصاص الكربون.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "📝 كويز الباب الثاني",
+                content: `<div id="quiz-area" class="quiz-container"></div>`
+            }
+        ];
+
+        // ==========================================
+        // 2. بنك الأسئلة (Unit 2)
+        // ==========================================
+        const questions = [
+            { q: "الغاز الذي يمثل النسبة الأكبر من حجم الغلاف الجوي هو:", options: ["الأكسجين", "النيتروجين", "ثاني أكسيد الكربون", "الأرجون"], a: 1, reason: "النيتروجين يمثل 78% من حجم الهواء." },
+            { q: "يقل الضغط الجوي إلى نصف قيمته كلما ارتفعنا عن سطح البحر مسافة:", options: ["1 كم", "5.5 كم", "11 كم", "16.5 كم"], a: 1, reason: "قاعدة ثابتة: الضغط ينصف كل 5.5 كم ارتفاع." },
+            { q: "إذا كانت طائرة تحلق على ارتفاع 11 كم، فإن الضغط الواقع عليها من الخارج:", options: ["1 ض.ج", "0.5 ض.ج", "0.25 ض.ج", "0.125 ض.ج"], a: 2, reason: "عند 0 كم = 1، عند 5.5 كم = 0.5، عند 11 كم = 0.25 (ربع)." },
+            { q: "تحدث كافة الظواهر الجوية (أمطار، سحب) في طبقة:", options: ["التروبوسفير", "الستراتوسفير", "الميزوسفير", "الثيرموسفير"], a: 0, reason: "الطبقة الأولى (المضطربة) تحتوي على معظم بخار الماء." },
+            { q: "يوجد غاز الأوزون الذي يحمي الأرض من الأشعة الضارة في طبقة:", options: ["التروبوسفير", "الستراتوسفير", "الميزوسفير", "الأيونوسفير"], a: 1, reason: "الأوزون يتركز في الستراتوسفير على ارتفاع من 20 لـ 40 كم." },
+            { q: "أبرد طبقات الغلاف الجوي هي:", options: ["التروبوسفير", "الستراتوسفير", "الميزوسفير", "الثيرموسفير"], a: 2, reason: "تصل الحرارة فيها لـ -90 تحت الصفر." },
+            { q: "غاز ضروري لعملية التنفس والاحتراق، ويمثل 21% من الهواء:", options: ["النيتروجين", "الأكسجين", "الهيدروجين", "الهيليوم"], a: 1, reason: "الأكسجين هو سر الحياة." },
+            { q: "ينعدم الضغط الجوي تقريباً في طبقة:", options: ["التروبوسفير", "الستراتوسفير", "الميزوسفير", "الإكسوسفير (الفضاء الخارجي)"], a: 3, reason: "في الفضاء الخارجي لا يوجد هواء وبالتالي لا يوجد ضغط." },
+            { q: "من مسببات تآكل طبقة الأوزون مركبات:", options: ["كلوروفلورو كربون (الفريونات)", "بخار الماء", "الأكسجين", "النيتروجين"], a: 0, reason: "الفريونات بتكسر جزيء الأوزون." },
+            { q: "الضغط الجوي داخل طائرة تحلق على ارتفاع شاهق يكون:", options: ["1 ضغط جوي", "0.25 ضغط جوي", "0.5 ضغط جوي", "صفر"], a: 0, reason: "خداع! الضغط 'داخل' الطائرة أو الغواصة يتم ضبطه ليكون 1 ضغط جوي عشان الركاب ميموتوش." }
+        ];
+
+        // ==========================================
+        // 3. المحرك (Logic)
+        // ==========================================
+        
+        const navArea = document.getElementById('nav-area');
+        const contentDisplay = document.getElementById('content-display');
+        const bgContainer = document.querySelector('.sky-container');
+
+        // أ- توليد السحاب عشوائياً
+        function createClouds() {
+            for(let i=0; i<8; i++) {
+                let cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                
+                // أحجام وأماكن عشوائية
+                let w = Math.random() * 150 + 100;
+                let h = w * 0.4;
+                cloud.style.width = w + 'px';
+                cloud.style.height = h + 'px';
+                cloud.style.top = Math.random() * 80 + '%';
+                cloud.style.left = Math.random() * 100 + '%';
+                cloud.style.animationDuration = (Math.random() * 20 + 20) + 's'; // سرعة متفاوتة
+                
+                bgContainer.appendChild(cloud);
+            }
+        }
+
+        // ب- بناء الأزرار والمحتوى
+        lessons.forEach((lesson, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'cloud-btn';
+            btn.innerText = lesson.title;
+            if(index === 0) btn.classList.add('active');
+            
+            btn.onclick = () => loadLesson(index);
+            navArea.appendChild(btn);
+        });
+
+        function loadLesson(index) {
+            // Active State
+            document.querySelectorAll('.cloud-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.cloud-btn')[index].classList.add('active');
+
+            // Render Content
+            const current = lessons[index];
+            contentDisplay.innerHTML = `
+                <div style="animation:fadeIn 0.5s">
+                    ${current.content}
+                </div>
+            `;
+
+            if(index === lessons.length - 1) {
+                renderQuiz();
+            }
+        }
+
+        // ج- منطق الكويز
+        function renderQuiz() {
+            const quizDiv = document.getElementById('quiz-area');
+            quizDiv.innerHTML = '';
+            
+            questions.forEach((q, idx) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'q-item';
+                
+                let optsHTML = '';
+                q.options.forEach((opt, oIdx) => {
+                    optsHTML += `<button class="opt-btn" onclick="check(this, ${idx}, ${oIdx})">${opt}</button>`;
+                });
+
+                qCard.innerHTML = `
+                    <h3 style="margin-top:0; color:#2d3436;">${idx+1}. ${q.q}</h3>
+                    ${optsHTML}
+                    <div id="feed-${idx}" class="feedback-text"></div>
+                `;
+                quizDiv.appendChild(qCard);
+            });
+        }
+
+        // دالة التصحيح (Global)
+        window.check = function(btn, qIdx, oIdx) {
+            const question = questions[qIdx];
+            const feedBox = document.getElementById(`feed-${qIdx}`);
+            const parent = btn.parentElement;
+            
+            // Disable all buttons in this question
+            const allBtns = parent.querySelectorAll('.opt-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            if(oIdx === question.a) {
+                btn.classList.add('correct');
+                feedBox.style.display = 'block';
+                feedBox.style.background = '#d4edda';
+                feedBox.style.color = '#155724';
+                feedBox.innerHTML = `✅ صح! ${question.reason}`;
+            } else {
+                btn.classList.add('wrong');
+                // Highlight correct one
+                allBtns[question.a].classList.add('correct');
+                
+                feedBox.style.display = 'block';
+                feedBox.style.background = '#f8d7da';
+                feedBox.style.color = '#721c24';
+                feedBox.innerHTML = `❌ غلط! الإجابة الصح: ${question.options[question.a]} <br> السبب: ${question.reason}`;
+            }
+        }
+
+        // تشغيل
+        createClouds();
+        loadLesson(0);
+
+    </script>
+</body>
+</html>
