@@ -444,19 +444,87 @@
         background: #c0392b;
         transform: scale(1.05);
       }
+      /* تنسيق الحاوية (يمين + فوق بعض) */
+      .top-right-nav {
+        position: absolute;
+        top: 20px;
+        right: 20px; /* مكانها يمين */
+        display: flex;
+        flex-direction: column; /* دي اللي بتخليهم فوق بعض */
+        gap: 10px; /* مسافة صغيرة بينهم */
+        z-index: 1000;
+        align-items: flex-end; /* عشان يحاذوا بعض من اليمين */
+      }
+
+      /* زرار الرجوع (صغير) */
+      .back-btn {
+        background: #e74c3c;
+        color: white;
+        padding: 8px 15px; /* حجم صغير */
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        text-align: center;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.9rem;
+        width: 120px; /* عرض ثابت عشان يبقوا قد بعض */
+      }
+      .back-btn:hover {
+        transform: scale(1.05);
+        background: #c0392b;
+      }
+
+      /* زرار الامتحان (صغير) */
+      .exam-btn-corner {
+        background: linear-gradient(45deg, #ff512f, #dd2476);
+        color: white;
+        padding: 8px 15px; /* حجم صغير */
+        text-decoration: none;
+        border-radius: 20px;
+        font-weight: 900;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.9rem;
+        box-shadow: 0 0 10px rgba(221, 36, 118, 0.4);
+        transition: 0.3s;
+        border: 2px solid white;
+        text-align: center;
+        animation: pulseBtn 2s infinite;
+        width: 120px; /* عرض ثابت */
+      }
+      .exam-btn-corner:hover {
+        transform: scale(1.05);
+      }
+
+      /* الأنيميشن */
+      @keyframes pulseBtn {
+        0% {
+          box-shadow: 0 0 0 0 rgba(221, 36, 118, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 5px rgba(221, 36, 118, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(221, 36, 118, 0);
+        }
+      }
     </style>
   </head>
   <body>
     <div class="sky-container" id="sky-bg">
       <div class="sun"></div>
     </div>
-
     <div class="container">
-      <a href="index.html" class="back-btn">⬅️ الرجوع للباب الأول</a>
+      <div class="top-right-nav">
+        <a href="index.html" class="back-btn"> ⬅️ الرجوع </a>
+
+        <a href="Final_Exam.html" class="exam-btn-corner"> 🚀 الامتحان </a>
+      </div>
 
       <header>
         <h1>✈️ الباب الثاني: الغلاف الجوي</h1>
-      
+        <p class="subtitle">الشرح التفصيلي الممل + 20 سؤال توقعات امتحان 🔥</p>
       </header>
 
       <div class="nav-cloud" id="nav-area"></div>
@@ -1027,5 +1095,3 @@
     </script>
   </body>
 </html>
-
-
