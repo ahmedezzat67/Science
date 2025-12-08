@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مهرجان الجيولوجيا: مراجعة ليلة الامتحان 🌋🎉</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap");
+
+      :root {
+        --main: #6c5ce7;
+        --sec: #00cec9;
+        --dark: #2d3436;
+        --light: #dfe6e9;
+        --success: #00b894;
+        --error: #d63031;
+        --warn: #fdcb6e;
+      }
+
+      body {
+        font-family: "Tajawal", sans-serif;
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        margin: 0;
+        padding: 0;
+        color: var(--dark);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* --- العائمات (Floating Elements) --- */
+      .floating-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+      .shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: float 20s infinite linear;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+        }
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+        }
+      }
+
+      /* --- الهيكل الرئيسي --- */
+      .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* الهيدر والشخصية */
+      header {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        border: 4px solid white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .mascot {
+        font-size: 4rem;
+        display: inline-block;
+        animation: bounce 2s infinite;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .mascot:hover {
+        transform: scale(1.2) rotate(10deg);
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      h1 {
+        margin: 10px 0;
+        font-size: 2.5rem;
+        color: var(--main);
+        text-shadow: 2px 2px 0px #eee;
+      }
+
+      /* عداد النتيجة */
+      .stats-bar {
+        display: flex;
+        justify-content: space-around;
+        background: var(--dark);
+        color: white;
+        padding: 15px;
+        border-radius: 50px;
+        margin-top: 15px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .stat-item span {
+        color: var(--warn);
+        font-size: 1.4rem;
+      }
+
+      /* --- التبويبات (Tabs) --- */
+      .tabs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .tab-btn {
+        background: rgba(255, 255, 255, 0.7);
+        border: none;
+        padding: 15px 25px;
+        border-radius: 20px;
+        font-family: inherit;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        color: var(--dark);
+        box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+      }
+      .tab-btn.active {
+        background: var(--main);
+        color: white;
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+      .tab-btn:hover:not(.active) {
+        background: white;
+        transform: translateY(-3px);
+      }
+
+      /* --- كروت الأسئلة --- */
+      .section-content {
+        display: none;
+        animation: slideUp 0.5s;
+      }
+      .section-content.active {
+        display: block;
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .q-card {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 25px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border-right: 6px solid var(--sec);
+        transition: 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .q-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .q-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .badge {
+        background: var(--sec);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+      }
+
+      /* أزرار الاختيارات */
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+      .opt-btn {
+        padding: 15px;
+        background: white;
+        border: 2px solid #eee;
+        border-radius: 15px;
+        text-align: right;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-family: inherit;
+        transition: 0.2s;
+        font-weight: 500;
+      }
+      .opt-btn:hover {
+        background: #f1f2f6;
+        border-color: var(--sec);
+        padding-right: 25px;
+      }
+
+      .opt-btn.correct {
+        background: var(--success);
+        color: white;
+        border-color: var(--success);
+      }
+      .opt-btn.wrong {
+        background: var(--error);
+        color: white;
+        border-color: var(--error);
+      }
+
+      /* المقالي */
+      .essay-box {
+        background: #fff3e0;
+        padding: 20px;
+        margin-top: 15px;
+        border-radius: 15px;
+        display: none;
+        border: 2px dashed var(--warn);
+        color: #d35400;
+        font-weight: bold;
+      }
+      .toggle-ans {
+        background: var(--dark);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-family: inherit;
+      }
+
+      /* التفسير والاحتفال */
+      .feedback {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 15px;
+        font-weight: bold;
+        display: none;
+        animation: popIn 0.3s;
+      }
+      @keyframes popIn {
+        0% {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* حركات */
+      .shake {
+        animation: shake 0.5s;
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-10px);
+        }
+        75% {
+          transform: translateX(10px);
+        }
+      }
+
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        z-index: 9999;
+        animation: fall linear forwards;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+      @keyframes pulseBtn {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(221, 36, 118, 0.7);
+        }
+        70% {
+          transform: scale(1.05);
+          box-shadow: 0 0 0 15px rgba(221, 36, 118, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(221, 36, 118, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="floating-bg" id="bg-shapes"></div>
+
+    <div class="container">
+      <header>
+        <div class="mascot" id="mascot">👨‍🏫</div>
+        <h1>مراجعة ليلة الامتحان</h1>
+        <p>70 سؤال في الجون ⚽</p>
+        <div class="gift-box-girls">
+          <div class="gift-icon-girls">🎁</div>
+          <h3>هدية من القلب.. لأشطر دكاترة في المستقبل</h3>
+          <p>
+            عشان عارف تعبكم ومجهودكم، جمعتلكم هنا
+            <strong>"الخلاصة"</strong> اللي مش هيخرج منها الامتحان بإذن الله.
+            <br />
+            ذاكروا بتركيز، وخليكم واثقين في نفسكم.. الدرجة النهائية بتناديلكم!
+            <br />
+            <span class="highlight-text">بالتوفيق يا بطلات 💪🌸</span>
+          </p>
+        </div>
+
+        <style>
+          .gift-box-girls {
+            background: linear-gradient(
+              135deg,
+              #fff0f3,
+              #fff
+            ); /* لون وردي هادي جداً مع أبيض */
+            border: 3px dashed #ffb7b2; /* برواز وردي ناعم */
+            border-radius: 25px;
+            padding: 30px;
+            margin: 40px auto;
+            text-align: center;
+            position: relative;
+            max-width: 800px;
+            box-shadow: 0 10px 25px rgba(255, 183, 178, 0.2);
+            animation: softFloat 4s ease-in-out infinite;
+          }
+
+          .gift-icon-girls {
+            font-size: 3.5rem;
+            margin-top: -60px;
+            background: white;
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid #ffb7b2;
+          }
+
+          .gift-box-girls h3 {
+            color: #e84393; /* لون فوشيا غامق وهادي */
+            margin: 15px 0;
+            font-size: 1.6rem;
+            font-family: "Tajawal", sans-serif;
+          }
+
+          .gift-box-girls p {
+            font-size: 1.3rem;
+            color: #636e72;
+            line-height: 1.8;
+          }
+
+          .highlight-text {
+            color: #d63031;
+            font-weight: bold;
+            background: #ffeaa7;
+            padding: 2px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 10px;
+          }
+
+          /* أنيميشن هادي ورقيق */
+          @keyframes softFloat {
+            0%,
+            100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-8px);
+            }
+          }
+        </style>
+        <div class="stats-bar">
+          <div class="stat-item">النتيجة: <span id="score">0</span></div>
+          <div class="stat-item">جاوبت: <span id="count">0</span> / 55</div>
+        </div>
+      </header>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('mcq')">
+          📝 35 اختياري
+        </button>
+        <button class="tab-btn" onclick="switchTab('tf')">✅ 20 صح وغلط</button>
+        <button class="tab-btn" onclick="switchTab('essay')">
+          💡 15 مقالي
+        </button>
+      </div>
+
+      <div id="mcq" class="section-content active"></div>
+
+      <div id="tf" class="section-content"></div>
+
+      <div id="essay" class="section-content"></div>
+      <div
+        style="
+          text-align: center;
+          margin: 40px 0;
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          flex-wrap: wrap;
+        "
+      >
+        <a
+          href="Unit2.html"
+          style="
+            background: white;
+            color: #2c3e50;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            display: inline-block;
+            border: 2px solid #bdc3c7;
+          "
+        >
+          🏠 الصفحة الرئيسية (الوحدة الثانية)
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // ==========================================
+      // 1. بنك الأسئلة (70 سؤال - توقعات)
+      // ==========================================
+
+      // --- أ. الاختياري (35 سؤال) ---
+      const mcqData = [
+        {
+          q: "أكبر نسبة من المياه العذبة توجد في:",
+          options: [
+            "الأنهار",
+            "الجليديات القطبية",
+            "المياه الجوفية",
+            "البحيرات",
+          ],
+          a: 1,
+          note: "الجليد يمثل النسبة الأكبر.",
+        },
+        {
+          q: "عند ارتفاع 11 كم، الضغط الجوي يساوي:",
+          options: ["1 ض.ج", "0.5 ض.ج", "0.25 ض.ج", "0.125 ض.ج"],
+          a: 2,
+          note: "ربع ضغط جوي.",
+        },
+        {
+          q: "الغاز الذي يمثل 78% من الهواء:",
+          options: ["الأكسجين", "النيتروجين", "CO2", "الأرجون"],
+          a: 1,
+          note: "النيتروجين هو الغالب.",
+        },
+        {
+          q: "تتميز مياه البحر الأحمر بملوحة:",
+          options: ["20 جم/لتر", "35 جم/لتر", "40 جم/لتر", "50 جم/لتر"],
+          a: 2,
+          note: "ملوحة عالية لزيادة البخر.",
+        },
+        {
+          q: "تستطيع الطحالب الحمراء العيش حتى عمق:",
+          options: ["10 م", "15 م", "25 م", "120 م"],
+          a: 2,
+          note: "25 متر.",
+        },
+        {
+          q: "كل الظواهر الجوية تحدث في طبقة:",
+          options: ["التروبوسفير", "الستراتوسفير", "الميزوسفير", "الثيرموسفير"],
+          a: 0,
+          note: "الطبقة المضطربة.",
+        },
+        {
+          q: "يقل الضغط للنصف كلما ارتفعنا:",
+          options: ["1 كم", "5.5 كم", "11 كم", "16.5 كم"],
+          a: 1,
+          note: "قاعدة الـ 5.5 كم.",
+        },
+        {
+          q: "الهائمات النباتية تعتبر كائنات:",
+          options: ["مستهلكة", "محللة", "منتجة", "رمية"],
+          a: 2,
+          note: "هي أساس الغذاء.",
+        },
+        {
+          q: "الضغط على غواص عند عمق 50 متر:",
+          options: ["5 ض.ج", "6 ض.ج", "50 ض.ج", "51 ض.ج"],
+          a: 1,
+          note: "50/10 + 1 = 6.",
+        },
+        {
+          q: "الأوزون يوجد في طبقة:",
+          options: ["التروبوسفير", "الستراتوسفير", "الميزوسفير", "الثيرموسفير"],
+          a: 1,
+          note: "الستراتوسفير.",
+        },
+        {
+          q: "عند انخفاض حرارة الماء عن 3 مئوية، الكثافة:",
+          options: ["تزيد", "تقل", "تثبت", "تتضاعف"],
+          a: 1,
+          note: "شذوذ الماء (الجليد يطفو).",
+        },
+        {
+          q: "أبرد طبقات الغلاف الجوي:",
+          options: ["الميزوسفير", "الثيرموسفير", "الستراتوسفير", "التروبوسفير"],
+          a: 0,
+          note: "تصل لـ -90.",
+        },
+        {
+          q: "الطاقة المفقودة بين حلقات السلسلة:",
+          options: ["10%", "50%", "90%", "100%"],
+          a: 2,
+          note: "المفقودة 90%، المنتقلة 10%.",
+        },
+        {
+          q: "ينعدم الضوء تماماً بعد عمق:",
+          options: ["200 م", "500 م", "100 م", "50 م"],
+          a: 1,
+          note: "500 متر (منطقة الظلام).",
+        },
+        {
+          q: "بحر الشمال والبلطيق ملوحتهم:",
+          options: ["20 جم/لتر", "40 جم/لتر", "35 جم/لتر", "10 جم/لتر"],
+          a: 0,
+          note: "ملوحة منخفضة.",
+        },
+        {
+          q: "السبب الرئيسي للتيارات البحرية:",
+          options: [
+            "الأسماك",
+            "اختلاف الكثافة والحرارة",
+            "المد والجزر",
+            "الزلازل",
+          ],
+          a: 1,
+          note: "اختلاف الكثافة.",
+        },
+        {
+          q: "طبقة الأيونوسفير توجد في:",
+          options: ["التروبوسفير", "الستراتوسفير", "الثيرموسفير", "الميزوسفير"],
+          a: 2,
+          note: "الجزء العلوي من الثيرموسفير.",
+        },
+        {
+          q: "نسبة الأكسجين في الهواء:",
+          options: ["21%", "78%", "1%", "50%"],
+          a: 0,
+          note: "خمس حجم الهواء.",
+        },
+        {
+          q: "نباتات وعائية تعيش حتى عمق:",
+          options: ["10 م", "20 م", "30 م", "40 م"],
+          a: 0,
+          note: "10 متر.",
+        },
+        {
+          q: "مسبب تآكل الأوزون:",
+          options: ["الفريونات", "بخار الماء", "الأكسجين", "الهيليوم"],
+          a: 0,
+          note: "الفريونات (CFCs).",
+        },
+        {
+          q: "الفرق في الضغط بين سطح البحر وقمة 5.5 كم:",
+          options: ["1", "0.5", "0.25", "2"],
+          a: 1,
+          note: "1 - 0.5 = 0.5.",
+        },
+        {
+          q: "أسماك المياه المالحة:",
+          options: ["لا تشرب", "تشرب كثيراً", "تشرب قليلاً", "تمتص بجلدها"],
+          a: 1,
+          note: "لتعويض فقد الماء.",
+        },
+        {
+          q: "القشريات الدقيقة تحتل الحلقة:",
+          options: ["الأولى", "الثانية", "الثالثة", "الرابعة"],
+          a: 1,
+          note: "مستهلك أول.",
+        },
+        {
+          q: "غاز يقلل الاشتعال:",
+          options: ["الأكسجين", "الهيدروجين", "النيتروجين", "الميثان"],
+          a: 2,
+          note: "النيتروجين.",
+        },
+        {
+          q: "طحالب بنية تعيش حتى عمق:",
+          options: ["10 م", "15 م", "25 م", "120 م"],
+          a: 1,
+          note: "15 متر.",
+        },
+        {
+          q: "ضغط عمود الماء فقط عند 20 متر:",
+          options: ["1", "2", "3", "20"],
+          a: 1,
+          note: "20/10 = 2.",
+        },
+        {
+          q: "الحيتان تعتبر:",
+          options: ["منتجة", "مستهلك أول", "مستهلك أخير", "محللة"],
+          a: 2,
+          note: "قمة الهرم.",
+        },
+        {
+          q: "الـ pH لمياه البحر:",
+          options: ["7", "8", "5", "14"],
+          a: 1,
+          note: "قلوي ضعيف.",
+        },
+        {
+          q: "الطيارات تطير في:",
+          options: ["التروبوسفير", "الستراتوسفير", "الميزوسفير", "الثيرموسفير"],
+          a: 1,
+          note: "لخلوها من الغيوم.",
+        },
+        {
+          q: "أكثر المناطق ملوحة:",
+          options: ["الاستوائية الجافة", "مصبات الأنهار", "القطبية", "الباردة"],
+          a: 0,
+          note: "بسبب البخر العالي.",
+        },
+        {
+          q: "طحالب مثبتة توجد عند:",
+          options: ["120 م", "150 م", "200 م", "500 م"],
+          a: 0,
+          note: "120 متر.",
+        },
+        {
+          q: "العلاقة بين كثافة الهواء والارتفاع:",
+          options: ["طردية", "عكسية", "ثابتة", "مضطربة"],
+          a: 1,
+          note: "كل ما نطلع الكثافة تقل.",
+        },
+        {
+          q: "الضغط عند 16.5 كم يمثل:",
+          options: ["نصف", "ربع", "ثمن", "سدس"],
+          a: 2,
+          note: "ثمن الضغط.",
+        },
+        {
+          q: "القشريات الدقيقة تتغذى على:",
+          options: ["الأسماك", "الهائمات النباتية", "الحيتان", "الطحالب"],
+          a: 1,
+          note: "الحلقة 2 تأكل الحلقة 1.",
+        },
+        {
+          q: "نسبة المياه المالحة:",
+          options: ["72%", "28%", "97%", "3%"],
+          a: 2,
+          note: "97%.",
+        },
+      ];
+
+      // --- ب. صح وغلط (20 سؤال) ---
+      const tfData = [
+        { q: "الضغط الجوي عند سطح البحر يعادل 76 سم زئبق.", a: 1, note: "صح." },
+        {
+          q: "يزداد ذوبان الأكسجين في البحر بارتفاع الحرارة.",
+          a: 0,
+          note: "غلط، يقل (علاقة عكسية).",
+        },
+        {
+          q: "الطحالب الحمراء تحتاج لضوء قوي وتعيش عند 10 متر.",
+          a: 0,
+          note: "غلط، تعيش لـ 25 متر وتستغل ضوء خافت.",
+        },
+        {
+          q: "معظم المياه العذبة توجد في الأنهار.",
+          a: 0,
+          note: "غلط، في الجليديات.",
+        },
+        {
+          q: "تزداد الحرارة في الستراتوسفير لوجود الأوزون.",
+          a: 1,
+          note: "صح.",
+        },
+        { q: "الطحالب المثبتة تعيش حتى 120 متر.", a: 1, note: "صح." },
+        {
+          q: "غاز النيتروجين ضروري للتنفس.",
+          a: 0,
+          note: "غلط، الأكسجين هو الضروري.",
+        },
+        { q: "سمك التروبوسفير 13 كم وتحدث بها الأمطار.", a: 1, note: "صح." },
+        {
+          q: "الضغط على جسم طائرة من الخارج عند 16.5 كم هو 0.125 ض.ج.",
+          a: 1,
+          note: "صح.",
+        },
+        {
+          q: "تتناقص الطاقة بمقدار 10% عند الانتقال.",
+          a: 0,
+          note: "غلط، تتناقص بمقدار 90%.",
+        },
+        {
+          q: "الميزوسفير هي أسخن طبقات الغلاف الجوي.",
+          a: 0,
+          note: "غلط، أبرد طبقة (-90).",
+        },
+        {
+          q: "تنتج أكاسيد النيتروجين من الطائرات الأسرع من الصوت.",
+          a: 1,
+          note: "صح.",
+        },
+        {
+          q: "أسماك المياه العذبة تخرج بولاً مركزاً.",
+          a: 0,
+          note: "غلط، بول مخفف لطرد الماء.",
+        },
+        { q: "يحيط الغلاف المائي بالأرض إحاطة كاملة.", a: 1, note: "صح." },
+        { q: "الضغط داخل الطائرة يكون دائماً 1 ضغط جوي.", a: 1, note: "صح." },
+        {
+          q: "تعتبر الهائمات الحيوانية كائنات منتجة.",
+          a: 0,
+          note: "غلط، مستهلك أول.",
+        },
+        { q: "الأيونوسفير يعكس موجات الراديو.", a: 1, note: "صح." },
+        {
+          q: "نسبة اليابس 72% من مساحة الأرض.",
+          a: 0,
+          note: "غلط، الماء هو الـ 72%.",
+        },
+        {
+          q: "الضوء ينفذ جيداً حتى عمق 200 متر.",
+          a: 1,
+          note: "صح (المنطقة المضيئة).",
+        },
+        {
+          q: "يتكون الغلاف الجوي من غازات منفردة.",
+          a: 1,
+          note: "صح (تحتفظ بخصائصها).",
+        },
+      ];
+
+      // --- ج. المقالي (15 سؤال - في الجون) ---
+      const essayData = [
+        {
+          q: "علل: شعور متسلقي الجبال بالاختناق؟",
+          a: "لنقص نسبة وكثافة غاز الأكسجين كلما ارتفعنا لأعلى (لأنه غاز ثقيل يتركز عند السطح).",
+        },
+        {
+          q: "ماذا يحدث عند انخفاض حرارة ماء البحر عن 3 مئوية؟",
+          a: "يتمدد الماء ويقل كثافته فيطفو الجليد، مما يحمي الأحياء المائية أسفله من التجمد.",
+        },
+        {
+          q: "احسب الضغط الكلي على سمكة بعمق 80 متر.",
+          a: "الضغط = (80 ÷ 10) + 1 = 9 ضغط جوي.",
+        },
+        {
+          q: "قارن بين ملوحة البحر الأحمر والبلطيق مع السبب.",
+          a: "الأحمر: 40 جم/لتر (بخر عالي). البلطيق: 20 جم/لتر (أمطار وسيول ومصبات).",
+        },
+        {
+          q: "علل: تفضل الطائرات الستراتوسفير؟",
+          a: "لخلوها من الغيوم والاضطرابات الجوية وحركة الهواء فيها أفقية.",
+        },
+        {
+          q: "بم تفسر: وفرة السمك في البحار القطبية؟",
+          a: "لبرودة الماء التي تزيد من الغازات المذابة، ووجود تيارات صاعدة تجلب المغذيات.",
+        },
+        {
+          q: "ماذا يحدث لو اختفت التيارات الصاعدة؟",
+          a: "لن تتوفر المغذيات (فوسفات ونترات) للسطح، فتموت الهائمات ويقل السمك.",
+        },
+        {
+          q: "وضح دور الميزوسفير والستراتوسفير في الحماية.",
+          a: "الميزوسفير تحرق الشهب. الستراتوسفير (الأوزون) تمتص الأشعة فوق البنفسجية.",
+        },
+        {
+          q: "مسألة: هبط شخص من 11 كم لسطح البحر. احسب فرق الضغط.",
+          a: "ضغط 11 كم = 0.25. ضغط السطح = 1. الفرق = 0.75 ض.ج.",
+        },
+        {
+          q: "علل: السلاسل البحرية طويلة ومهدرة للطاقة؟",
+          a: "لأن معظم حلقاتها أكلات لحوم، ويتم فقد 90% من الطاقة عند كل انتقال.",
+        },
+        {
+          q: "ما أثر البراكين القديمة في تكوين الأغلفة؟",
+          a: "أطلقت بخار الماء الذي كون الغلاف المائي، والغازات التي كونت الغلاف الجوي.",
+        },
+        {
+          q: "علل: لا توجد نباتات بعد عمق 500 متر.",
+          a: "لانعدام الضوء تماماً، فلا تستطيع القيام بالبناء الضوئي.",
+        },
+        {
+          q: "كيف تتكيف أسماك المياه المالحة مع الملوحة؟",
+          a: "تشرب ماء كثيراً، وتخرج بولاً مركزاً وقليلاً للحفاظ على الماء.",
+        },
+        {
+          q: "ماذا يحدث لو زاد CO2 في الجو؟",
+          a: "تحدث ظاهرة الاحتباس الحراري وترتفع درجة حرارة الأرض (الصوبة الزجاجية).",
+        },
+        {
+          q: "احسب عمق غواص يتعرض لضغط 6 ضغط جوي.",
+          a: "العمق = (الضغط - 1) × 10 = (6 - 1) × 10 = 50 متر.",
+        },
+      ];
+
+      // ==========================================
+      // 2. المحرك (Logic)
+      // ==========================================
+
+      let score = 0;
+      let answeredCount = 0;
+      const totalObjQuestions = mcqData.length + tfData.length;
+
+      // توليد الأشكال الخلفية
+      const bgContainer = document.getElementById("bg-shapes");
+      const shapes = ["🌊", "☁️", "🐟", "✈️", "🫧", "🌋"];
+      for (let i = 0; i < 30; i++) {
+        let el = document.createElement("div");
+        el.className = "shape";
+        el.innerText = shapes[Math.floor(Math.random() * shapes.length)];
+        el.style.left = Math.random() * 100 + "%";
+        el.style.animationDuration = Math.random() * 20 + 10 + "s";
+        el.style.fontSize = Math.random() * 2 + 1 + "rem";
+        bgContainer.appendChild(el);
+      }
+
+      // دالة التبديل بين التبويبات
+      function switchTab(tabId) {
+        document
+          .querySelectorAll(".section-content")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById(tabId).classList.add("active");
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+      }
+
+      // دالة تحديث الشخصية
+      function updateMascot(state) {
+        const mascot = document.getElementById("mascot");
+        if (state === "correct") {
+          mascot.innerText = "😎🔥";
+          setTimeout(() => (mascot.innerText = "👨‍🏫"), 1500);
+        } else if (state === "wrong") {
+          mascot.innerText = "😱💔";
+          setTimeout(() => (mascot.innerText = "👨‍🏫"), 1500);
+        }
+      }
+
+      // --- بناء الأسئلة ---
+
+      // 1. بناء الاختياري
+      const mcqContainer = document.getElementById("mcq");
+      mcqData.forEach((q, i) => {
+        mcqContainer.innerHTML += `
+                <div class="q-card" id="mcq-${i}">
+                    <div class="q-title"><span class="badge">س${i + 1}</span> ${
+          q.q
+        }</div>
+                    <div class="options">
+                        ${q.options
+                          .map(
+                            (opt, oIdx) => `
+                            <button class="opt-btn" onclick="checkMCQ(${i}, ${oIdx}, this)">${opt}</button>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                    <div class="feedback" id="feed-mcq-${i}"></div>
+                </div>
+            `;
+      });
+
+      // 2. بناء الصح والغلط
+      const tfContainer = document.getElementById("tf");
+      tfData.forEach((q, i) => {
+        tfContainer.innerHTML += `
+                <div class="q-card" id="tf-${i}">
+                    <div class="q-title"><span class="badge">س${i + 1}</span> ${
+          q.q
+        }</div>
+                    <div class="options" style="grid-template-columns: 1fr 1fr;">
+                        <button class="opt-btn" onclick="checkTF(${i}, 1, this)">✔️ صح</button>
+                        <button class="opt-btn" onclick="checkTF(${i}, 0, this)">❌ خطأ</button>
+                    </div>
+                    <div class="feedback" id="feed-tf-${i}"></div>
+                </div>
+            `;
+      });
+
+      // 3. بناء المقالي
+      const essayContainer = document.getElementById("essay");
+      essayData.forEach((q, i) => {
+        essayContainer.innerHTML += `
+                <div class="q-card">
+                    <div class="q-title" style="color:#d35400"><span class="badge" style="background:#e67e22">س${
+                      i + 1
+                    }</span> ${q.q}</div>
+                    <button class="toggle-ans" onclick="this.nextElementSibling.style.display='block'">أظهر الإجابة النموذجية 🧐</button>
+                    <div class="essay-box">${q.a}</div>
+                </div>
+            `;
+      });
+
+      // --- دوال التصحيح ---
+
+      function updateStats() {
+        document.getElementById("score").innerText = score;
+        document.getElementById("count").innerText = answeredCount;
+      }
+
+      window.checkMCQ = function (idx, choice, btn) {
+        const q = mcqData[idx];
+        const feed = document.getElementById(`feed-mcq-${idx}`);
+        const parent = document.getElementById(`mcq-${idx}`);
+
+        // منع التكرار
+        const btns = parent.querySelectorAll(".opt-btn");
+        btns.forEach((b) => (b.disabled = true));
+        answeredCount++;
+
+        if (choice === q.a) {
+          score++;
+          btn.classList.add("correct");
+          feed.style.display = "block";
+          feed.style.color = "var(--success)";
+          feed.style.background = "#d1f2eb";
+          feed.innerHTML = `🎉 الله عليك! ${q.note}`;
+          updateMascot("correct");
+          createConfetti();
+        } else {
+          btn.classList.add("wrong");
+          btns[q.a].classList.add("correct"); // نور الصح
+          parent.classList.add("shake");
+          feed.style.display = "block";
+          feed.style.color = "var(--error)";
+          feed.style.background = "#fadbd8";
+          feed.innerHTML = `😓 الإجابة الصح: ${q.options[q.a]} <br> (${
+            q.note
+          })`;
+          updateMascot("wrong");
+        }
+        updateStats();
+      };
+
+      window.checkTF = function (idx, choice, btn) {
+        const q = tfData[idx];
+        const feed = document.getElementById(`feed-tf-${idx}`);
+        const parent = document.getElementById(`tf-${idx}`);
+
+        const btns = parent.querySelectorAll(".opt-btn");
+        btns.forEach((b) => (b.disabled = true));
+        answeredCount++;
+
+        if (choice === q.a) {
+          score++;
+          btn.classList.add("correct");
+          feed.style.display = "block";
+          feed.style.color = "var(--success)";
+          feed.style.background = "#d1f2eb";
+          feed.innerHTML = `🎉 برافو! ${q.note}`;
+          updateMascot("correct");
+          createConfetti();
+        } else {
+          btn.classList.add("wrong");
+          btns[q.a === 1 ? 0 : 1].classList.add("correct");
+          parent.classList.add("shake");
+          feed.style.display = "block";
+          feed.style.color = "var(--error)";
+          feed.style.background = "#fadbd8";
+          feed.innerHTML = `😓 غلطة! التصويب: ${q.note}`;
+          updateMascot("wrong");
+        }
+        updateStats();
+      };
+
+      // --- الكونفيتي ---
+      function createConfetti() {
+        const colors = ["#e74c3c", "#3498db", "#f1c40f", "#2ecc71", "#9b59b6"];
+        for (let i = 0; i < 50; i++) {
+          const conf = document.createElement("div");
+          conf.className = "confetti";
+          conf.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          conf.style.left = Math.random() * 100 + "%";
+          conf.style.top = -10 + "px";
+          conf.style.animationDuration = Math.random() * 2 + 1 + "s";
+          document.body.appendChild(conf);
+          setTimeout(() => conf.remove(), 3000);
+        }
+      }
+    </script>
+  </body>
+</html>
